@@ -23,6 +23,7 @@ except:
     threshold = 5000
     
 path_to_json = config('INPUT_DIR')
+output_dir = config('OUTPUT_DIR')
 ext_from_config = config('EXT')
 ext = tuple(map(str, ext_from_config.split(',')))
 json_files = [pos_json for pos_json in os.listdir(path_to_json) if pos_json.endswith(ext)]
@@ -62,7 +63,7 @@ if jsons_data.empty:
     print('No gaps found in collection')
 else:
     print(jsons_data)         
-    jsons_data.to_csv('output/Veritone_GapAnalysis.csv', index=False)
+    jsons_data.to_csv(os.path.join(output_dir, 'Veritone_GapAnalysis.csv'), index=False)
 if len(files_with_errors) > 0:
     print('The following files were skipped due to errors:  ')
     print(files_with_errors)
